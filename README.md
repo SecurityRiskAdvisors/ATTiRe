@@ -45,7 +45,7 @@ Commercial and open source red team operator tools use proprietary logging forma
                 "type": "guid",
                 "id": "c9d0c4ef-8a96-4794-a75b-3d3a5e6f2a36"
             },
-            "mitre-technique-id": "T1218.010",
+			"mitre-technique-id": "T1218.010",
             "order": 1,
             "steps": [
                 {
@@ -54,7 +54,7 @@ Commercial and open source red team operator tools use proprietary logging forma
                     "order": 1,
                     "output": [
                         {
-                            "content": "File C:\\Users\\User\\Desktop\\AEv1.0 - Administrator-10\\T1070001 - Delete System Logs Using Clear-EventLog.ps1 cannot be \r\nloaded. The file C:\\Users\\User\\Desktop\\AEv1.0 - Administrator-10\\T1070001 - Delete System Logs Using \r\nClear-EventLog.ps1 is not digitally signed. You cannot run this script on the current system. For more information \r\nabout running scripts and setting execution policy, see about_Execution_Policies at \r\nhttps:/go.microsoft.com/fwlink/?LinkID=135170.\r\n    + CategoryInfo          : SecurityError: (:) [], ParentContainsErrorRecordException\r\n    + FullyQualifiedErrorId : UnauthorizedAccess",
+                            "content": "File C:\\Users\\User\\Desktop\\AEv1.0 - Administrator-10\\T1218010 - Regsvr32 remote COM scriptlet executio.ps1 cannot be \r\nloaded. The file C:\\Users\\User\\Desktop\\AEv1.0 - Administrator-10\\T1218010 - Regsvr32 remote COM scriptlet executio is not digitally signed. You cannot run this script on the current system. For more information \r\nabout running scripts and setting execution policy, see about_Execution_Policies at \r\nhttps:/go.microsoft.com/fwlink/?LinkID=135170.\r\n    + CategoryInfo          : SecurityError: (:) [], ParentContainsErrorRecordException\r\n    + FullyQualifiedErrorId : UnauthorizedAccess",
                             "level": "STDERR",
                             "type": "console"
                         }
@@ -67,3 +67,44 @@ Commercial and open source red team operator tools use proprietary logging forma
     ]
 }
 ```
+
+## Concepts
+
+### Versioning
+This refers to ATTiRe v1.1. Subsequent foundational changes will lead to an increase in the ATTiRe version number.
+
+### Execution Data
+
+Execution data in ATTiRe represents an execution event. For a portable executable or disposable script emulating a single procedure or a series of TTP's, this includes information related to the command run to trigger the execution and the active environment.
+
+* **execution-command**: the command run to trigger the execution event
+* **execution-id**: a unique identifier for the execution event, usually a random string meant to help dedupe attack logs
+* **execution-source**: metadata describing the source of the execution. Typically used by the log consumer to name a campaign.  examples: Invoke-atomicredteam, Cobalt Strike, Powershell Empire
+* **execution-category**: (optional) metadata describing the category of all tests being run. This may be used by the log consumer to modify or provide additional detail to procedure names for long-term reference purposes like creating templates.
+  * **name**: name for an execution category
+  * **abbreviation**: abbreviation for an execution category. May be used by log consumer to prefix generated procedure templates. Example: an abbreviation of "PRE" might create a procedure template of "PRE - Procedure1" for a procedure named "Procedure1"
+* **target**: target metadata for the execution event. A target may be something like information about a host where procedures are run or a web URL for a target application.
+  * **host**: hostname where execution event was targeted
+  * **ip**: IP address where execution event was targeted 
+  * **path**: (optional) path information on the execution target
+  * **user**: (optional) username of running user on execution target
+* **time-generated**: the time this logfile was generated
+
+### Procedures
+
+Procedures represent a specific and reproducible instance of an attack that may be categorized by one or more MITRE Technique IDs. Many procedures may be categorized by a single MITRE Technique ID, and a procedure may be categorized by multiple MITRE Technique IDs. For testing clarity, it helps if there is a primary MITRE Technique ID representing the action being performed.
+
+* **procedure-name**: a preferably unique name for the procedure being executed. Naming is more important than it seems. Noting proper specificity in the type of execution being performed makes it easier to prepare defenses for the exact type of attack and gather intelligence on other similar attacks you may want to test. 
+> Bad name example: "WMI Exec" 
+> 
+> Good name example: "WMI Exec using WMIC.exe with os get /format flags"
+> 
+> Coverage and testing against the badly named procedure could lead to a false sense of security for other types of WMI execution attacks.
+* **procedure-description**: a longer form description of the procedure being executed
+* **procedure-id**: unique identifier for a specific procedure. This helps to identify the procedure being run over time for historical tracking of results
+  * **type**: the type of procedure ID, currently log consumers only support GUID
+  * **id**: the procedure ID contents
+* **mitre-technique-id**: the primary mitre technique id for this procedure
+* **order**: (optional) the order this procedure was ran in the list of procedures
+* **steps**: a list of steps executed within the described procedure
+  * **command**: the command for the current step. Example: may be a command line execution like cmd.exe /c ipconfig
