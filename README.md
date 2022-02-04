@@ -71,7 +71,7 @@ Commercial and open source red team operator tools use proprietary logging forma
 }
 ```
 
-## Concepts
+## Description of Contents
 
 ### Versioning
 This refers to ATTiRe v1.1. Subsequent foundational changes will lead to an increase in the ATTiRe version number.
