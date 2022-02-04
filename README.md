@@ -11,11 +11,14 @@ Commercial and open source red team operator tools use proprietary logging forma
 * VECTR (https://vectr.io)
 ### Log Export
 * VECTR's (https://vectr.io) portable executable attack automation components log to the ATTiRe format out of the box.
-* SRA Invoke-atomicredteam fork awaiting upstream merge
+* SRA Invoke-atomicredteam fork awaiting dev complete and upstream merge
 
 ## Future Goals
+* Python ATTiRe logging library 
+* Invoke-Atomicredteam modular ATTiRe logger
 * UBJSON support - https://json.nlohmann.me/features/binary_formats/ubjson/
   * For embedding binary data like videos and screenshots rather than BASE64-encoding
+* Attack success / fail data
 
 ## ATTiRe Sample
 ```js
@@ -108,3 +111,11 @@ Procedures represent a specific and reproducible instance of an attack that may 
 * **order**: (optional) the order this procedure was ran in the list of procedures
 * **steps**: a list of steps executed within the described procedure
   * **command**: the command for the current step. Example: may be a command line execution like cmd.exe /c ipconfig
+  * **executor**: a string representing the executor for the current step. If intended to be reproducible, should match expected enumerated values by consuming tool
+  * **order**: An integer value to inform th enumbering of this command step
+  * **time-start**: ISO-8601 timestamp in UTC representing the start time of the command. Example: "2021-10-27T02:02:23.000Z"
+  * **time-stop**: ISO-8601 timestamp in UTC representing the stop time of the command. Example: "2021-10-27T02:02:25.000Z"
+  * **output**: Output entries from the current command
+    * **content**: String content output from the current command, may include encoded data like base64 depending on the consuming application
+    * **level**: The level of logging content - typically STDERR / STDOUT for console, could be INFO, ERROR, WARN for applications
+    * **type**: The type of command step output. Example: "console"
