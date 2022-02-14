@@ -15,6 +15,7 @@ Commercial and open source red team operator tools use proprietary logging forma
 
 ## Future Goals
 * Python ATTiRe logging library 
+* atomic-operator modular ATTiRe logger
 * Invoke-Atomicredteam modular ATTiRe logger
 * UBJSON support - https://json.nlohmann.me/features/binary_formats/ubjson/
   * For embedding binary data like videos and screenshots rather than BASE64-encoding
