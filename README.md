@@ -9,6 +9,9 @@ Commercial and open source red team operator tools use proprietary logging forma
 
 ### Log Ingestion
 * VECTR (https://vectr.io)
+# ![VECTR](media/attire1.png)
+# ![VECTR](media/attire2.png)
+# ![VECTR](media/attire3.png)
 ### Log Export
 * VECTR's (https://vectr.io) portable executable attack automation components log to the ATTiRe format out of the box.
 * SRA Invoke-atomicredteam fork awaiting dev complete and upstream merge
