@@ -15,12 +15,14 @@ Commercial and open source red team operator tools use proprietary logging forma
 # ![VECTR](media/attire3.png)
 ### Log Export
 * VECTR's (https://vectr.io) portable executable attack automation components log to the ATTiRe format out of the box.
-* SRA Invoke-atomicredteam fork awaiting dev complete and upstream merge
+* SRA Invoke-atomicredteam ATTiRe Logger (https://github.com/SecurityRiskAdvisors/invoke-atomic-attire-logger)
+
+### Log / Report Conversion
+* Caldera to ATTiRe converter
 
 ## Future Goals
+* atomic-operator modular ATTiRe logger (in testing)
 * Python ATTiRe logging library 
-* atomic-operator modular ATTiRe logger
-* Invoke-Atomicredteam modular ATTiRe logger
 * UBJSON support - https://json.nlohmann.me/features/binary_formats/ubjson/
   * For embedding binary data like videos and screenshots rather than BASE64-encoding
 * Attack success / fail data
