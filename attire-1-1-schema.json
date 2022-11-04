@@ -1,0 +1,697 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://docs.vectr.io/attire-1-1-schema.json",
+    "type": "object",
+    "title": "ATTiRe logging format v1.1",
+    "description": "Attack Tool Timing and Reporting structured logging format for Red Team / Cybersecurity attack tools v1.1",
+    "default": {},
+    "additionalProperties": true,
+    "required": [
+        "execution-data",
+        "procedures"
+    ],
+    "properties": {
+        "execution-data": {
+            "$id": "#/properties/execution-data",
+            "type": "object",
+            "title": "Execution Data",
+            "description": "Data at this level provides context for a particular execution or chain of attacks performed by an attack tool which may contain multiple logged events",
+            "default": {},
+            "examples": [
+                {
+                    "group-name": "Endpoint Campaign",
+                    "assessment-name": "Q2 2020 Purple Team",
+                    "source": [
+                        {
+                            "domain": "computercorp.com",
+                            "ip": "192.168.40.154"
+                        }
+                    ],
+                    "executable": "Endpoint_Campaign_2020041716133102.exe",
+                    "x-vectr-io-campaign-template": "79578cf5-a380-42b4-a296-b9afbc41bbe7",
+                    "x-vectr-io-campaign-id": "a6991f75-e364-41a0-b44f-423d282b5631",
+                    "target": {
+                        "ip": "192.168.40.154",
+                        "path": "PATH=C:\\WINDOWS\\System32",
+                        "user": "JohnClark1",
+                        "cwd": "C:\\Users\\John Clark\\Desktop",
+                        "host": "DESKTOP-25KQJ6B"
+                    },
+                    "execution-id": "g1RazDtZgbXGsvRtd1rhBfqgO1R+PA93FDrnE81qVTg=",
+                    "time-generated": "2020-04-02T14:17:46.384Z",
+                    "execution-source": "SRA Hodag"
+                }
+            ],
+            "additionalProperties": true,
+            "required": [
+                "execution-id",
+                "execution-source",
+                "target"
+            ],
+            "properties": {
+                "time-generated": {
+                    "$id": "#/properties/execution-data/properties/time-generated",
+                    "type": "string",
+                    "title": "Executable Time Generated",
+                    "description": "When the executable was buillt if the source was an executable binary or script.",
+                    "default": "",
+                    "examples": [
+                        "2020-04-02T14:17:46.384Z"
+                    ]
+                },
+                "executable": {
+                    "$id": "#/properties/execution-data/properties/executable",
+                    "type": "string",
+                    "title": "Executable Name",
+                    "description": "The file name of an executable if the source was an executable binary or script",
+                    "default": "",
+                    "examples": [
+                        "Endpoint_Campaign_202004171656001.exe"
+                    ]
+                },
+                "execution-id": {
+                    "$id": "#/properties/execution-data/properties/execution-id",
+                    "type": "string",
+                    "title": "Execution ID",
+                    "description": "A unique ID for this execution event which may contain multiple procedures and commands (meant to distinguish and link executions).",
+                    "default": "",
+                    "examples": [
+                        "g1RatQtWgbXGsvqtdaohIfqgO1R+PA23FDrnE81qVTg="
+                    ]
+                },
+                "execution-source": {
+                    "$id": "#/properties/execution-data/properties/execution-source",
+                    "type": "string",
+                    "title": "Execution Source",
+                    "description": "The creating tool for these logs.",
+                    "default": "",
+                    "examples": [
+                        "SRA Hodag"
+                    ]
+                },
+                "assessment-name": {
+                    "$id": "#/properties/execution-data/properties/assessment-name",
+                    "type": "string",
+                    "title": "Assessment Name",
+                    "description": "Name for the overall Asessment being performed. This may used if the execution is part of a broader Assessment.",
+                    "default": "",
+                    "examples": [
+                        "Q2 2020 Purple Team",
+                        "Continuous Purple Team",
+                        "2020 Q1 Adversary Emulation Red Team"
+                    ]
+                },
+                "group-name": {
+                    "$id": "#/properties/execution-data/properties/group-name",
+                    "type": "string",
+                    "title": "Group Name",
+                    "description": "Name for this campaign or group of procedures being run.",
+                    "default": "",
+                    "examples": [
+                        "Endpoint Campaign",
+                        "APT99 Malware Emulation Campaign 2099"
+                    ]
+                },
+                "x-vectr-io-campaign-template": {
+                    "$id": "#/properties/execution-data/properties/x-vectr-io-campaign-template",
+                    "type": "string",
+                    "title": "VECTR Campaign template ID",
+                    "description": "Matches this execution with a Campaign template.",
+                    "default": "",
+                    "examples": [
+                        "<UUID>"
+                    ]
+                },
+                "x-vectr-io-campaign-id": {
+                    "$id": "#/properties/execution-data/properties/x-vectr-io-campaign-id",
+                    "type": "string",
+                    "title": "VECTR Campaign ID",
+                    "description": "Matches this execution with a VECTR Campaign.",
+                    "default": "",
+                    "examples": [
+                        "<UUID>"
+                    ]
+                },
+                "target": {
+                    "$id": "#/properties/execution-data/properties/target",
+                    "type": "object",
+                    "title": "Target",
+                    "description": "Target context.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "ip": "192.168.40.154",
+                            "path": "PATH=...",
+                            "user": "Joe Shmoe",
+                            "cwd": "C:\\Users\\Joe Shmoe\\Desktop",
+                            "host": "DESKTOP-25KQJ6B"
+                        }
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                        "ip": {
+                            "$id": "#/properties/execution-data/properties/target/properties/ip",
+                            "type": "string",
+                            "title": "IP",
+                            "description": "IPv4 address of a target.",
+                            "default": "",
+                            "examples": [
+                                "192.168.40.154"
+                            ]
+                        },
+                        "cwd": {
+                            "$id": "#/properties/execution-data/properties/target/properties/cwd",
+                            "type": "string",
+                            "title": "Command Working Directory",
+                            "description": "Working directory where commands were executed.",
+                            "default": "",
+                            "examples": [
+                                "C:\\Users\\Joe Shmoe\\Desktop"
+                            ]
+                        },
+                        "host": {
+                            "$id": "#/properties/execution-data/properties/target/properties/host",
+                            "type": "string",
+                            "title": "Host",
+                            "description": "Target Host data.",
+                            "default": "",
+                            "examples": [
+                                "DESKTOP-25KQJ6B"
+                            ]
+                        },
+                        "path": {
+                            "$id": "#/properties/execution-data/properties/target/properties/path",
+                            "type": "string",
+                            "title": "PATH",
+                            "description": "Windows PATH environment variable.",
+                            "default": "",
+                            "examples": [
+                                "PATH=..."
+                            ]
+                        },
+                        "user": {
+                            "$id": "#/properties/execution-data/properties/target/properties/user",
+                            "type": "string",
+                            "title": "Target User",
+                            "description": "User run as on Target.",
+                            "default": "",
+                            "examples": [
+                                "Joe Shmoe"
+                            ]
+                        }
+                    }
+                },
+                "source": {
+                    "$id": "#/properties/execution-data/properties/source",
+                    "type": "array",
+                    "title": "Source",
+                    "description": "Attack source data.",
+                    "default": [],
+                    "examples": [
+                        [
+                            {
+                                "ip": "192.168.40.154",
+                                "domain": "computercorp.com"
+                            }
+                        ]
+                    ],
+                    "additionalItems": true,
+                    "items": {
+                        "$id": "#/properties/execution-data/properties/source/items",
+                        "type": "object",
+                        "title": "Source Items",
+                        "description": "Individual items in Source object.",
+                        "default": {},
+                        "examples": [
+                            {
+                                "domain": "alphabits",
+                                "ip": "192.168.40.154"
+                            }
+                        ],
+                        "additionalProperties": true,
+                        "properties": {
+                            "ip": {
+                                "$id": "#/properties/execution-data/properties/source/items/properties/ip",
+                                "type": "string",
+                                "title": "Source IP",
+                                "description": "IP for the Source item.",
+                                "default": "",
+                                "examples": [
+                                    "192.168.40.154"
+                                ]
+                            },
+                            "domain": {
+                                "$id": "#/properties/execution-data/properties/source/items/properties/domain",
+                                "type": "string",
+                                "title": "Source Domain",
+                                "description": "Domain for the Source item.",
+                                "default": "",
+                                "examples": [
+                                    "computercorp.com"
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "procedures": {
+            "$id": "#/properties/procedures",
+            "type": "array",
+            "title": "Procedures",
+            "description": "A set of procedures run during this execution.",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "x-vectr-io-testcase-id": "<UUID>",
+                        "mitre-technique-id": "T1004",
+                        "steps": [
+                            {
+                                "order": 1.0,
+                                "success-regex": "/Nmap ran/g",
+                                "command": "cmd.exe /c dir",
+                                "output": [
+                                    {
+                                        "content": "Nmap ran and found 0 hosts",
+                                        "level": "STDOUT",
+                                        "type": "console"
+                                    }
+                                ],
+                                "time-start": "2020-04-02T14:17:46.384Z",
+                                "time-stop": "2020-04-02T14:18:46.384Z"
+                            },
+                            {
+                                "command-template": "cmd.exe /c dir -p {{ip}}",
+                                "order": 2.0,
+                                "command": "cmd.exe /c errorcommand -p 192.168.1.99",
+                                "output": [
+                                    {
+                                        "content": "Command not found",
+                                        "level": "STDERR",
+                                        "type": "console"
+                                    }
+                                ],
+                                "time-start": "2020-04-02T14:19:46.384Z",
+                                "time-stop": "2020-04-02T14:20:46.384Z",
+                                "input-arguments": [
+                                    {
+                                        "name": "IP",
+                                        "key": "ip",
+                                        "type": "ip-address",
+                                        "value": "192.168.1.99",
+                                        "default": "192.168.1.1",
+                                        "description": "IP Address target for some command that will error out"
+                                    }
+                                ]
+                            }
+                        ],
+                        "order": 1.0,
+                        "procedure-name": "Run dir command against C drive using cmd.exe",
+                        "x-vectr-io-testcase-template": "<UUID>"
+                    },
+                    {
+                        "x-vectr-io-testcase-id": "<UUID>",
+                        "steps": [
+                            {
+                                "order": 1.0,
+                                "output": [
+                                    {
+                                        "type": "console",
+                                        "content": "Nmap ran and found 0 hosts",
+                                        "level": "STDOUT"
+                                    }
+                                ],
+                                "time-start": "2020-04-02T14:21:46.384Z",
+                                "time-stop": "2020-04-02T14:22:46.384Z",
+                                "command": "cmd.exe netstat"
+                            }
+                        ],
+                        "order": 2.0,
+                        "procedure-name": "Run netstat with no parameters using cmd.exe",
+                        "x-vectr-io-testcase-template": "<UUID>"
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/procedures/items",
+                "type": "object",
+                "title": "Procedure Items",
+                "description": "Individual atomic procedures/test cases.",
+                "default": {},
+                "examples": [
+                    {
+                        "procedure-name": "Run dir command against C drive using cmd.exe",
+                        "x-vectr-io-testcase-template": "<UUID>",
+                        "x-vectr-io-testcase-id": "<UUID>",
+                        "mitre-technique-id": "T1004",
+                        "steps": [
+                            {
+                                "order": 1.0,
+                                "success-regex": "/Nmap ran/g",
+                                "command": "cmd.exe /c dir",
+                                "output": [
+                                    {
+                                        "content": "Nmap ran and found 0 hosts",
+                                        "level": "STDOUT",
+                                        "type": "console"
+                                    }
+                                ],
+                                "time-start": "2020-04-02T14:21:46.384Z",
+                                "time-stop": "2020-04-02T14:22:46.384Z"
+                            },
+                            {
+                                "output": [
+                                    {
+                                        "content": "Command not found",
+                                        "level": "STDERR",
+                                        "type": "console"
+                                    }
+                                ],
+                                "input-arguments": [
+                                    {
+                                        "description": "IP Address target for some command that will error out",
+                                        "key": "ip",
+                                        "name": "IP",
+                                        "type": "ip-address",
+                                        "default": "192.168.1.1",
+                                        "value": "192.168.1.99"
+                                    }
+                                ],
+                                "command-template": "cmd.exe /c dir -p {{ip}}",
+                                "order": 2.0,
+                                "time-start": "2020-04-02T14:23:46.384Z",
+                                "time-stop": "2020-04-02T14:24:46.384Z",
+                                "command": "cmd.exe /c errorcommand -p 192.168.1.99"
+                            }
+                        ],
+                        "order": 1.0
+                    },
+                    {
+                        "steps": [
+                            {
+                                "command": "cmd.exe netstat",
+                                "order": 1.0,
+                                "output": [
+                                    {
+                                        "content": "Nmap ran and found 0 hosts",
+                                        "level": "STDOUT",
+                                        "type": "console"
+                                    }
+                                ],
+                                "time-start": "2020-04-02T14:23:47.384Z",
+                                "time-stop": "2020-04-02T14:23:58.384Z"
+                            }
+                        ],
+                        "order": 2.0,
+                        "procedure-name": "Run netstat with no parameters using cmd.exe",
+                        "x-vectr-io-testcase-template": "<UUID>",
+                        "x-vectr-io-testcase-id": "<UUID>"
+                    }
+                ],
+                "additionalProperties": true,
+                "required": [
+                    "steps"
+                ],
+                "properties": {
+                    "procedure-name": {
+                        "$id": "#/properties/procedures/items/properties/procedure-name",
+                        "type": "string",
+                        "title": "Procedure name",
+                        "description": "A unique name for a procedure.",
+                        "default": "",
+                        "examples": [
+                            "Run dir command against C drive using cmd.exe"
+                        ]
+                    },
+                    "mitre-technique-id": {
+                        "$id": "#/properties/procedures/items/properties/mitre-technique-id",
+                        "type": "string",
+                        "title": "MITRE Technique ID",
+                        "description": "The MITRE Technique ID for a procedure",
+                        "default": "",
+                        "examples": [
+                            "T1004"
+                        ]
+                    },
+                    "x-vectr-io-testcase-template": {
+                        "$id": "#/properties/procedures/items/properties/x-vectr-io-testcase-template",
+                        "type": "string",
+                        "title": "VECTR Test Case Template ID",
+                        "description": "VECTR Test Case Template ID",
+                        "default": "",
+                        "examples": [
+                            "<UUID>"
+                        ]
+                    },
+                    "x-vectr-io-testcase-id": {
+                        "$id": "#/properties/procedures/items/properties/x-vectr-io-testcase-id",
+                        "type": "string",
+                        "title": "VECTR Test Case ID",
+                        "description": "VECTR Test Case ID.",
+                        "default": "",
+                        "examples": [
+                            "<UUID>"
+                        ]
+                    },
+                    "order": {
+                        "$id": "#/properties/procedures/items/properties/order",
+                        "type": "integer",
+                        "title": "Order",
+                        "description": "Procedure execution order.",
+                        "default": 0,
+                        "examples": [
+                            1.0
+                        ]
+                    },
+                    "steps": {
+                        "$id": "#/properties/procedures/items/properties/steps",
+                        "type": "array",
+                        "title": "Procedure item steps",
+                        "description": "Steps included in a procedure.",
+                        "default": [],
+                        "examples": [
+                            [
+                                {
+                                    "command": "cmd.exe /c dir",
+                                    "output": [
+                                        {
+                                            "content": "Nmap ran and found 0 hosts",
+                                            "level": "STDOUT",
+                                            "type": "console"
+                                        }
+                                    ],
+                                    "order": 1.0,
+                                    "success-regex": "/Nmap ran/g",
+                                    "time-start": "2020-04-02T14:23:59.384Z",
+                                    "time-stop": "2020-04-02T14:24:46.384Z"
+                                },
+                                {
+                                    "command": "cmd.exe /c errorcommand -p 192.168.1.99",
+                                    "output": [
+                                        {
+                                            "content": "Command not found",
+                                            "level": "STDERR",
+                                            "type": "console"
+                                        }
+                                    ],
+                                    "input-arguments": [
+                                        {
+                                            "type": "ip-address",
+                                            "default": "192.168.1.1",
+                                            "value": "192.168.1.99",
+                                            "description": "IP Address target for some command that will error out",
+                                            "name": "IP",
+                                            "key": "ip"
+                                        }
+                                    ],
+                                    "command-template": "cmd.exe /c dir -p {{ip}}",
+                                    "order": 2.0,
+                                    "time-start": "2020-04-02T14:25:59.384Z",
+                                    "time-stop": "2020-04-02T14:26:59.384Z"
+                                }
+                            ]
+                        ],
+                        "additionalItems": true,
+                        "items": {
+                            "$id": "#/properties/procedures/items/properties/steps/items",
+                            "type": "object",
+                            "title": "Procedure step items",
+                            "description": "Inidividual step item in a procedure.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "order": 1.0,
+                                    "success-regex": "/Nmap ran/g",
+                                    "command": "cmd.exe /c dir",
+                                    "output": [
+                                        {
+                                            "type": "console",
+                                            "content": "Nmap ran and found 0 hosts",
+                                            "level": "STDOUT"
+                                        }
+                                    ],
+                                    "time-start": "2020-04-02T14:27:59.384Z",
+                                    "time-stop": "2020-04-02T14:28:59.384Z"
+                                },
+                                {
+                                    "command": "cmd.exe /c errorcommand -p 192.168.1.99",
+                                    "output": [
+                                        {
+                                            "level": "STDERR",
+                                            "type": "console",
+                                            "content": "Command not found"
+                                        }
+                                    ],
+                                    "input-arguments": [
+                                        {
+                                            "description": "IP Address target for some command that will error out",
+                                            "key": "ip",
+                                            "name": "IP",
+                                            "type": "ip-address",
+                                            "value": "192.168.1.99",
+                                            "default": "192.168.1.1"
+                                        }
+                                    ],
+                                    "order": 2.0,
+                                    "command-template": "cmd.exe /c dir -p {{ip}}",
+                                    "time-stop": "2020-04-02T14:30:59.384Z",
+                                    "time-start": "2020-04-02T14:31:59.384Z"
+                                }
+                            ],
+                            "additionalProperties": true,
+                            "required": [
+                                "command",
+                                "order",
+                                "time-start",
+                                "time-stop"
+                            ],
+                            "properties": {
+                                "command": {
+                                    "$id": "#/properties/procedures/items/properties/steps/items/properties/command",
+                                    "type": "string",
+                                    "title": "Command",
+                                    "description": "A command that was executed on the target system.",
+                                    "default": "",
+                                    "examples": [
+                                        "cmd.exe /c dir"
+                                    ]
+                                },
+                                "order": {
+                                    "$id": "#/properties/procedures/items/properties/steps/items/properties/order",
+                                    "type": "integer",
+                                    "title": "Order",
+                                    "description": "Order of command execution for a step in a procedure.",
+                                    "default": 0,
+                                    "examples": [
+                                        1.0
+                                    ]
+                                },
+                                "time-start": {
+                                    "$id": "#/properties/procedures/items/properties/steps/items/properties/time-start",
+                                    "type": "string",
+                                    "title": "Command Start Time",
+                                    "description": "The time the command was started.",
+                                    "default": "",
+                                    "examples": [
+                                        "2020-04-02T14:30:59.384Z"
+                                    ]
+                                },
+                                "time-stop": {
+                                    "$id": "#/properties/procedures/items/properties/steps/items/properties/time-stop",
+                                    "type": "string",
+                                    "title": "Command Stop Time",
+                                    "description": "The time the command completed.",
+                                    "default": "",
+                                    "examples": [
+                                        "202004171657045"
+                                    ]
+                                },
+                                "output": {
+                                    "$id": "#/properties/procedures/items/properties/steps/items/properties/output",
+                                    "type": "array",
+                                    "title": "Command Output",
+                                    "description": "Output from a Command",
+                                    "default": [],
+                                    "examples": [
+                                        [
+                                            {
+                                                "level": "STDOUT",
+                                                "type": "console",
+                                                "content": "Nmap ran and found 0 hosts"
+                                            }
+                                        ]
+                                    ],
+                                    "additionalItems": true,
+                                    "items": {
+                                        "$id": "#/properties/procedures/items/properties/steps/items/properties/output/items",
+                                        "type": "object",
+                                        "title": "Command Output Items",
+                                        "description": "Individual records from a commands output",
+                                        "default": {},
+                                        "examples": [
+                                            {
+                                                "content": "Nmap ran and found 0 hosts",
+                                                "level": "STDOUT",
+                                                "type": "console"
+                                            }
+                                        ],
+                                        "additionalProperties": true,
+                                        "required": [
+                                            "type",
+                                            "level",
+                                            "content"
+                                        ],
+                                        "properties": {
+                                            "type": {
+                                                "$id": "#/properties/procedures/items/properties/steps/items/properties/output/items/properties/type",
+                                                "type": "string",
+                                                "title": "Type",
+                                                "description": "Log output type",
+                                                "default": "",
+                                                "examples": [
+                                                    "console"
+                                                ]
+                                            },
+                                            "level": {
+                                                "$id": "#/properties/procedures/items/properties/steps/items/properties/output/items/properties/level",
+                                                "type": "string",
+                                                "title": "Level",
+                                                "description": "Logging level (relative to the logger, may be STDOUT for console or INFO/WARN for application logging)",
+                                                "default": "",
+                                                "examples": [
+                                                    "STDOUT"
+                                                ]
+                                            },
+                                            "content": {
+                                                "$id": "#/properties/procedures/items/properties/steps/items/properties/output/items/properties/content",
+                                                "type": "string",
+                                                "title": "Output Content",
+                                                "description": "This is the actual content of log output.",
+                                                "default": "",
+                                                "examples": [
+                                                    "Nmap ran and found 0 hosts"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "success-regex": {
+                                    "$id": "#/properties/procedures/items/properties/steps/items/properties/success-regex",
+                                    "type": "string",
+                                    "title": "Success Regex",
+                                    "description": "A regular expression to run on the output to determine if the command successfully executed (not currently in use).",
+                                    "default": "",
+                                    "examples": [
+                                        "/Nmap ran/g"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
